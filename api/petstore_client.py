@@ -13,3 +13,6 @@ class PetstoreClient:
 
     def find_pets_by_status(self, status="available"):
         return requests.get(f"{self.base_url}/pet/findByStatus", params={"status": status})
+
+    def get_store_inventory(self):
+        return requests.get(f"{self.base_url}/store/inventory")
