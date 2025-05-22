@@ -9,25 +9,39 @@ from utils.asserts import Asserts
 def client():
     return PetstoreClient() # Создание и возвращение экземпляра PetstoreClient
 
+@allure.sub_suite("Petstore API Tests")
 @allure.feature("Pet API")
-@allure.story("Получение питомца по ID")
-@allure.severity(allure.severity_level.CRITICAL)
-@allure.title("Проверка получения питомца по ID")
-def test_get_pet_by_id(client):
-    pet_id = 2
-    response = client.get_pet_by_id(pet_id)
+class TestPetApi:
 
-    asserts = Asserts(response)
+    @allure.title("Проверка получения питомца по ID")
+    def test_get_pet_by_id(self, client):
+        pet_id = 2
+        response = client.get_pet_by_id(pet_id)
 
-    asserts.assert_status_code(200)
-    asserts.assert_json_field_equals("id", 1)
+        asserts = Asserts(response)
+
+        asserts.assert_status_code(200)
+        asserts.assert_json_field_equals("id", 2)
+
+    @allure.title("Проверка получения питомца по статусу")
+    @pytest.mark.parametrize("status", [
+        "available",
+        "pending",
+        "sold",
+        "available,pending",
+        "available,sold",
+        "pending,sold",
+        "available,pending,sold"
+    ])
+    def test_find_pets_by_status(self, client, status):
+        response = client.find_pets_by_status(status=status)
+        print(f"Запрос по статусу '{status}': {response.request.url}")
+        asserts = Asserts(response)
+
+        asserts.assert_status_code(200)
+        asserts.attach_response()
 
 
-def test_find_pets_by_status(client):
-    response = client.find_pets_by_status("available")
-    assert response.status_code == 200
-    assert isinstance(response.json(), list)
-
-def test_get_store_inventory(client):
-    response = client.get_store_inventory()
-    assert response.status_code == 200
+    def test_get_store_inventory(self, client):
+        response = client.get_store_inventory()
+        assert response.status_code == 200

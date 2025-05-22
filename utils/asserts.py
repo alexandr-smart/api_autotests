@@ -16,20 +16,21 @@ class Asserts:
 
     def attach_response(self):
         """Аттачит тело ответа в Allure (текст и JSON, если возможно)."""
-        try:
-            json_data = self.response.json()
-            allure.attach(
-                json.dumps(json_data, indent=2, ensure_ascii=False),
-                name="Ответ (JSON)",
-                attachment_type=allure.attachment_type.JSON
-            )
-        except json.JSONDecodeError:
-            # Если не JSON, прикрепим как текст
-            allure.attach(
-                self.response.text,
-                name="Ответ (текст)",
-                attachment_type=allure.attachment_type.TEXT
-            )
+        with allure.step("Сохраняем ответ"):
+            try:
+                json_data = self.response.json()
+                allure.attach(
+                    json.dumps(json_data, indent=2, ensure_ascii=False),
+                    name="Ответ (JSON)",
+                    attachment_type=allure.attachment_type.JSON
+                )
+            except json.JSONDecodeError:
+                # Если не JSON, прикрепим как текст
+                allure.attach(
+                    self.response.text,
+                    name="Ответ (текст)",
+                    attachment_type=allure.attachment_type.TEXT
+                )
 
     def assert_status_code(self, expected_status_code):
         """Универсальная проверка статус кода"""
