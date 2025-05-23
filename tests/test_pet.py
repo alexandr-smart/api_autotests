@@ -23,6 +23,7 @@ class TestPetApi:
         asserts.assert_status_code(200)
         asserts.assert_json_field_equals("id", 2)
 
+
     @allure.title("Проверка получения питомца по статусу")
     @pytest.mark.parametrize("status", [
         "available",
