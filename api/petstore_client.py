@@ -1,14 +1,10 @@
-import os
-
 import allure
 import requests
-from dotenv import load_dotenv
-
-load_dotenv()
+from config import load_env
 
 class PetstoreClient:
     def __init__(self):
-        self.base_url = os.getenv("BASE_URL")
+        self.base_url = load_env()
 
     @allure.step("Отправка запроса на получение питомца")
     def get_pet_by_id(self, pet_id):
