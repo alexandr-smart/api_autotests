@@ -32,6 +32,8 @@ jobs:
         pip install allure-pytest
 
     - name: Run tests with Allure
+      env:
+        PYTHONPATH: .
       run: pytest --alluredir=allure-results --env=dev
 
     - name: Generate Allure report
@@ -42,4 +44,3 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./allure-report
-
