@@ -2,5 +2,4 @@ requests~=2.32.3
 python-dotenv~=1.1.0
 pytest~=8.3.5
 allure-pytest
-allure-commandline
 allure-python-commons~=2.14.2
