@@ -34,7 +34,7 @@ jobs:
     - name: Run tests with Allure
       env:
         PYTHONPATH: .
-        BASE_URL: BASE_URL=https://petstore.swagger.io/v2
+        BASE_URL: https://petstore.swagger.io/v2
         API_KEY: any_key_here
         ENV_NAME: prod
       run: pytest --alluredir=allure-results --env=prod
