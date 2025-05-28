@@ -14,9 +14,9 @@ def client():
 class TestPetApi:
 
     @allure.title("Проверка получения питомца по ID")
-    def test_get_pet_by_id(self, client):
+    def test_get_pet_by_id(self, client, api_headers):
         pet_id = 2
-        response = client.get_pet_by_id(pet_id)
+        response = client.get_pet_by_id(pet_id, headers=api_headers)
 
         asserts = Asserts(response)
 

@@ -1,18 +1,16 @@
 import os
-from pathlib import Path
 from dotenv import load_dotenv
 
-
 def load_config(env: str = "dev") -> dict:
-    """Загружает конфиг из .env-файла по имени окружения."""
-    env_file = Path(f".env.{env}")
-    if not env_file.exists():
-        raise FileNotFoundError(f"Env file {env_file} not found!")
+    dotenv_file = f".env.{env}"
+    if not os.path.exists(dotenv_file):
+        raise FileNotFoundError(f"Missing .env file for {env}")
 
-    load_dotenv(env_file)  # Загружаем переменные в os.environ
+    load_dotenv(dotenv_file)
 
     return {
         "base_url": os.getenv("BASE_URL"),
-        "api_key": os.getenv("API_KEY"),
-        "timeout": int(os.getenv("TIMEOUT", 10)),
+        "env_name": env,
+        # Всегда читаем API_KEY, если он есть в .env.{env}
+        "api_key": os.getenv("API_KEY")
     }

@@ -1,6 +1,6 @@
 # Запуск тестов на Linux
 ```bash
-PYTHONPATH=. pytest /home/test/PycharmProjects/api_autotests/tests --env=dev --alluredir=allure-results 
+PYTHONPATH=. pytest /home/test/PycharmProjects/api_autotests/tests --env=prod --alluredir=allure-results 
 ```
 
 Run allure-reports Linux
