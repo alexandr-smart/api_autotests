@@ -1,6 +1,6 @@
 # Запуск тестов на Linux
 ```bash
-PYTHONPATH=. pytest /home/test/PycharmProjects/api_autotests/tests --env=prod --alluredir=allure-results 
+PYTHONPATH=. pytest /home/test/PycharmProjects/api_autotests/tests --env=dev --alluredir=allure-results 
 ```
 
 Run allure-reports Linux
@@ -18,3 +18,6 @@ Run allure-reports Windows
 ```bash
 allure serve C:\Users\alexandr\PycharmProjects\api_autotests\allure-results
 ```
+
+
+# команда для запуска мок сервера prism mock open_api.yaml
