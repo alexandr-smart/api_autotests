@@ -1,8 +1,5 @@
-feat/api_fix
-/.idea/api_autotests.iml
-/.idea/misc.xml
-/.idea/inspectionProfiles/profiles_settings.xml
-/.idea/vcs.xml
-/.idea/workspace.xml
+/.idea
+__pycache__/
+*.рус
 /allure-results/
 
